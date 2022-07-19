@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Pedido>
+
+@{
+    ViewData["Title"] = "Lista de Pedidos Realizados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Cliente
+            </th>
+            <th>
+                Valor do Pedido
+            </th>
+            <th>
+                Endereço
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente.Nome)
+            </td>
+            <td>
+                R$ @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+            <td>
+                @(item.ClienteEndereco.Endereco.Logradouro 
+                    + " nº " + item.ClienteEndereco.Endereco.Numero
+                    + ", Bairro " + item.ClienteEndereco.Endereco.Bairro)
+            </td>
+            <td>
+                <a class="btn btn-outline-success" asp-action="VerPedido" asp-route-idPedido="@item.Id">Detalhes</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

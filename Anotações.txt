@@ -1,0 +1,9 @@
+//COMANDO UTILIZADO PARA MIGRAR TABELAS PARA OS MODELS DO .NET
+
+Scaffold-DbContext "Data Source=.\;Initial Catalog=RainbowColor;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer
+
+Scaffold-DbContext "Server=.\SQLExpress;Database=RainbowColor;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
+
+
+//MUDAR IDENTITY TELAS
+https://bluerhinolabs.medium.com/customize-login-page-on-asp-net-core-web-application-73cc9574da32

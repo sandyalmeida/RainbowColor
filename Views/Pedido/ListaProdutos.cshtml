@@ -1,0 +1,90 @@
+﻿@model PedidoViewModel
+
+@{
+    ViewData["Title"] = "Selecione os itens que deseja adicionar ao carrinho:";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form id="TrocarCliente" asp-action="TrocarCliente">
+    <div class="form-group">
+        <label class="control-label">Selecione o cliente: </label>
+        <select id="trocarLista" asp-for="ClienteId" class="form-control" asp-items="ViewBag.Clientes"></select>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Descrição do Produto
+            </th>
+            <th>
+                Valor Unitário
+            </th>
+            <th>
+                Quantidade em estoque:
+            </th>
+            <th>Digite a quantidade desejada: </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Produtos) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estoque)
+            </td>
+            <td>
+                <input id=@item.Id name="qtd-@item.Id" type="number" asp-for=@item.Quantidade>
+            </td>
+            <td>
+                <a id=@item.Id class="btn btn-outline-success" asp-action="Adicionar" asp-route-idProduto="@item.Id" 
+                asp-route-idCliente=@Model.ClienteId asp-route-Quantidade=@Model.Quantidade
+                >Adicionar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+    
+    //Código que força o submit para mudarmos o Cliente selecionado
+    $('#trocarLista').on('change', function (e) {
+        $('#TrocarCliente').submit();
+    });
+
+    //funão disparada quando saímos do input Quantidade
+    $('input[name*="qtd"]').blur(function(){
+        var idProduto = $(this).attr('id');
+        mudaRota(idProduto);
+        
+    });
+
+    //função para mudar a rota e passar a quantidade de itens digitadas
+    function mudaRota(idProduto) {
+
+        var quantidade = $('input[id=' + idProduto + ']').val();
+        
+        var Href = $('a[id=' + idProduto + ']').attr('href');
+
+        var novoHref= Href.substring(0, Href.lastIndexOf("=")) + "=" + quantidade;     
+        $('a[id=' + idProduto + ']').attr("href", novoHref);        
+    }
+
+
+</script>
+}    

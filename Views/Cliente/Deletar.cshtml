@@ -1,0 +1,54 @@
+﻿@model RainbowColor.Cliente
+
+@{
+    ViewData["Title"] = "Deletar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+<h3>Você quer realmente excluir esse cliente?</h3>
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CpfCnpj)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CpfCnpj)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeletarConfirmado">
+        <input type="hidden" asp-for="IdCliente" />
+        <input class="btn btn-outline-danger" type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a class="btn btn-outline-info" asp-action="Index">Voltar para Lista</a>
+    </form>
+</div>
+</body>
+</html>

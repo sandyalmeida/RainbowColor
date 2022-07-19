@@ -1,0 +1,84 @@
+﻿@model RainbowColor.PedidoViewModel
+
+@{
+    ViewData["Title"] = "Conferir Pedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Você quer realmente realizar esse pedido?
+    Escolha o endereço de entrega:
+</h3>
+
+<form id="TrocarEndereco" asp-action="TrocarEndereco">
+    <div class="form-group">
+        <label class="control-label">Selecione o endereço de entrega: </label>
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+        <select id="trocarEndereco" asp-for="IdEndereco" class="form-control" asp-items="ViewBag.Enderecos"></select>
+    </div>
+</form>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Descrição do Produto
+                </th>
+                <th>
+                    Valor Unitário
+                </th>
+                <th>
+                    Quantidade solicitada
+                </th>
+                <th>
+                    Valor total do item
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.PedidoProdutos) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produto.Valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    R$ @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group text-right">
+            <a class="btn btn-outline-success" asp-action="EfetuarPedido" asp-route-idEndereco="@Model.IdEndereco" asp-route-idPedido="@Model.Id" >Realizar Pedido</a>
+            <a class="btn btn-outline-info" asp-action="IndexCarrinho">Voltar para a lista</a>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        //Código que força o submit para mudarmos o Cliente selecionado
+        $('#trocarEndereco').on('change', function (e) {
+            $('#TrocarEndereco').submit();
+        });
+    </script>
+}

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RainbowColor.Endereco>
+
+@{
+    ViewData["Title"] = "Lista de Endereços";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"] do cliente @ViewData["NomeCliente"]</h1>
+
+<p>
+    <a class="btn btn-outline-success" asp-action="Criar" asp-route-idCliente=@ViewData["IdCliente"]>Cadastrar novo endereço</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Logradouro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Numero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Complemento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Logradouro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Numero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bairro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Complemento)
+            </td>
+            <td>
+                <a class="btn btn-outline-warning" asp-action="Editar" asp-route-id="@item.Id" asp-route-idCliente="@ViewData["IdCliente"]">Editar</a> |
+                <a class="btn btn-outline-danger" asp-action="Deletar" asp-route-id="@item.Id" asp-route-idCliente="@ViewData["IdCliente"]">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div>
+    <a class="btn btn-outline-info" asp-action="Index" asp-controller="Cliente" asp-route-idCliente=@ViewData["IdCliente"]>Voltar para lista</a>
+</div>
+

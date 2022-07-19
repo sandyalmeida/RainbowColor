@@ -1,0 +1,45 @@
+﻿@model RainbowColor.Endereco
+
+@{
+    ViewData["Title"] = "Deletar Endereço";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Você tem certeza de que quer excluir esse endereço?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Logradouro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Logradouro)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Numero)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Numero)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bairro)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bairro)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Complemento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Complemento)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeletarConfirmado" asp-route-idCliente=@ViewData["IdCliente"]>
+        <input type="hidden" asp-for="Id" />
+        <input class="btn btn-outline-danger" type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a class="btn btn-outline-info" asp-action="Index" asp-route-idCliente=@ViewData["IdCliente"]>Voltar para lista</a>
+    </form>
+</div>

@@ -1,0 +1,46 @@
+﻿@model RainbowColor.Produto
+
+@{
+    ViewData["Title"] = "Deletar Produto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>Você quer realmente excluir esse produto?</h3>
+<div>
+    <h4>Produto</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Estoque)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Estoque)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Categoria)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Categoria.Descricao)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeletarConfirmado">
+        <input type="hidden" asp-for="Id" />
+        <input class="btn btn-outline-danger" type="submit" value="Deletar" class="btn btn-danger" /> |
+        <a class="btn btn-outline-info" asp-action="Index">Voltar para a lista</a>
+    </form>
+</div>
